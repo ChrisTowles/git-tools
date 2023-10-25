@@ -1,0 +1,84 @@
+{
+  "name": "@ChrisTowles/git-tools",
+  "type": "module",
+  "version": "0.0.1",
+  "packageManager": "pnpm@8.9.2",
+  "description": "Chris Towles's Git-Tools",
+  "author": "Chris Towles (https://github.com/ChrisTowles/)",
+  "license": "MIT",
+  "homepage": "https://github.com/antfu/eslint-config",
+  "keywords": [
+    "git-tools"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "gt": "bin/gt.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+
+  "scripts": {
+    "dev": "cross-env DEBUG=git-tools:* esno ./src/cli.ts",
+    "start": "esno ./src/cli.ts",
+    "build": "unbuild",
+    "lint": "pnpm run stub && eslint .",
+    "stub": "tsup src/index.ts --format esm",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "nr build",
+    "release": "bumpp && pnpm publish --no-git-checks",
+    "test": "vitest",
+    "prepare": "simple-git-hooks"
+  },
+  "dependencies": {
+    "@antfu/ni": "^0.21.8",
+    "@npmcli/config": "^8.0.0",
+    "cli-progress": "^3.12.0",
+    "deepmerge": "^4.3.1",
+    "detect-indent": "^7.0.1",
+    "execa": "^8.0.1",
+    "pacote": "^17.0.4",
+    "picocolors": "^1.0.0",
+    "prompts": "^2.4.2",
+    "semver": "^7.5.4",
+    "unconfig": "^0.3.11",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^1.0.0-beta.27",
+    "@antfu/utils": "^0.7.6",
+    "@types/cli-progress": "^3.11.3",
+    "@types/debug": "^4.1.9",
+    "@types/node": "^20.8.6",
+    "@types/pacote": "^11.1.6",
+    "@types/prompts": "^2.4.6",
+    "@types/semver": "^7.5.3",
+    "@types/yargs": "^17.0.28",
+    "bumpp": "^9.2.0",
+    "cross-env": "^7.0.3",
+    "debug": "^4.3.4",
+    "eslint": "^8.51.0",
+    "esno": "^0.17.0",
+    "fast-glob": "^3.3.1",
+    "lint-staged": "^15.0.2",
+    "rimraf": "^5.0.5",
+    "simple-git-hooks": "^2.9.0",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2",
+    "unbuild": "^2.0.0",
+    "vitest": "^0.34.6"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
+}
